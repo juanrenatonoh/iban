@@ -23,5 +23,7 @@
 hs_err_pid*
 replay_pid*
 
-# Virtual environment
+# Python files
 venv/
+__pycache__/
+*.pyc

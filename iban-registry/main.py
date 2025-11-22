@@ -15,21 +15,21 @@ ARCHIVO_SALIDA = 'registro_iban.xlsx'
 # EJECUCIÓN PRINCIPAL
 # ==========================================
 
-if __name__ == "__main__":
-    print("=" * 60)
-    print("CONVERSOR IBAN TXT → EXCEL")
-    print("=" * 60)
-    print()
-    
-    # Ejecutar la conversión
-    exito = IbanRegistryService.convertir_txt_a_excel(ARCHIVO_ENTRADA, ARCHIVO_SALIDA);
+print("=" * 60)
+print("CONVERSOR IBAN TXT → EXCEL")
+print("=" * 60)
+print()
 
-    print()
-    print("=" * 60)
+exito = IbanRegistryService.convertir_txt_a_excel(ARCHIVO_ENTRADA, ARCHIVO_SALIDA);
+
+print()
+print("=" * 60)
+
+if exito:
+    print("PROCESO FINALIZADO ✓")
+else:
+    print("PROCESO FINALIZADO CON ERRORES ✗")
     
-    if exito:
-        print("PROCESO FINALIZADO ✓")
-    else:
-        print("PROCESO FINALIZADO CON ERRORES ✗")
+print("=" * 60)
     
-    print("=" * 60)
+  

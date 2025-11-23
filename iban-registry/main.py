@@ -1,35 +1,41 @@
 from IbanRegistryService import IbanRegistryService
+from fastapi import FastAPI
+
+app = FastAPI()
 
 
-# ==========================================
-# CONFIGURACIÓN
-# ==========================================
+@app.get("/")
+async def root():
+    return {"message": "Hello World"}
 
-# Nombre del archivo de entrada
-ARCHIVO_ENTRADA = 'iban-registry.txt'
 
-# Nombre del archivo de salida
-ARCHIVO_SALIDA = 'registro_iban.xlsx'
-
-# ==========================================
-# EJECUCIÓN PRINCIPAL
-# ==========================================
-
-print("=" * 60)
-print("CONVERSOR IBAN TXT → EXCEL")
-print("=" * 60)
-print()
-
-exito = IbanRegistryService.convertir_txt_a_excel(ARCHIVO_ENTRADA, ARCHIVO_SALIDA);
-
-print()
-print("=" * 60)
-
-if exito:
-    print("PROCESO FINALIZADO ✓")
-else:
-    print("PROCESO FINALIZADO CON ERRORES ✗")
+@app.post("/importar_registry")
+async def importar_registry():
     
-print("=" * 60)
+    ARCHIVO_ENTRADA = 'iban-registry.txt'
+    ARCHIVO_SALIDA = 'registro_iban.xlsx'
+
+    print("=" * 60)
+    print("CONVERSOR IBAN TXT → EXCEL")
+    print("=" * 60)
+    print()
+
+    exito = IbanRegistryService.convertir_txt_a_excel(ARCHIVO_ENTRADA, ARCHIVO_SALIDA)
+
+    print()
+    print("=" * 60)
+
+    if exito:
+        print("PROCESO FINALIZADO ✓")
+    else:
+        print("PROCESO FINALIZADO CON ERRORES ✗")
     
-  
+    print("=" * 60)
+
+    return {
+        "exito": exito,
+        "mensaje": "Proceso finalizado" if exito else "Proceso finalizado con errores"
+    }
+    
+
+

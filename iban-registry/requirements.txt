@@ -1,2 +1,4 @@
 openpyxl
 pandas
+fastapi[standard]==0.113.0
+pydantic==2.8.0

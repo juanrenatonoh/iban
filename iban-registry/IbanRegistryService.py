@@ -1,6 +1,6 @@
 
 import pandas as pd
-
+from fastapi import  UploadFile, File
 
 class IbanRegistryService:
 
@@ -17,10 +17,16 @@ class IbanRegistryService:
         Retorna:
             bool: True si la conversión fue exitosa, False si hubo error
     """
-    def convertir_txt_a_excel(archivo_txt, archivo_excel): 
+    def upload_registry(file: UploadFile = File(...)): 
         
-        
+        ARCHIVO_ENTRADA = 'iban-registry.txt'
+        ARCHIVO_SALIDA = 'registro_iban.xlsx'
+
         try:
+
+            with open(ARCHIVO_ENTRADA, "wb") as f:
+                f.write(file.file.read())
+
             print(f" Leyendo archivo: {archivo_txt}")
             
             # PASO 1: Leer el archivo TXT

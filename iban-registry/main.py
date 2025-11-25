@@ -17,7 +17,7 @@ See the Dictionary file on Readme.md from the IBAN Registry
 @app.post("/upload_registry")
 async def upload_registry(file: UploadFile = File(...)):
     
-    logger.info("Uploading Iban Registry...",file.filename)
+    logger.info("Uploading Iban Registry...")
     IbanRegistryService.upload_registry(file)
     logger.info("Iban Registry loaded successfully")
     

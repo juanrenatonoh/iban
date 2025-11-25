@@ -1,6 +1,9 @@
 
 import pandas as pd
 from fastapi import  UploadFile, File
+from iban_registry_repository import IbanRegistryRepository
+
+
 
 class IbanRegistryService:
 
@@ -27,47 +30,30 @@ class IbanRegistryService:
             with open(ARCHIVO_ENTRADA, "wb") as f:
                 f.write(file.file.read())
 
-            print(f" Leyendo archivo: {archivo_txt}")
+            print(f" Leyendo archivo:")
             
-            # PASO 1: Leer el archivo TXT
-            # Intentamos diferentes encodings comunes hasta encontrar el correcto
+             # Detectar encoding y leer TXT
             encodings = ['latin-1', 'cp1252', 'iso-8859-1', 'utf-8']
             df = None
-            
+
             for encoding in encodings:
                 try:
-                    print(f"   Intentando con encoding: {encoding}")
-                    df = pd.read_csv(
-                        archivo_txt,
-                        sep='\t',
-                        encoding=encoding,
-                        keep_default_na=False
-                    )
-                    print(f"   ✓ Encoding correcto: {encoding}")
+                    df = pd.read_csv(ARCHIVO_ENTRADA, sep='\t', encoding=encoding, keep_default_na=False)
                     break
                 except UnicodeDecodeError:
                     continue
-            
+
             if df is None:
                 raise Exception("No se pudo detectar el encoding del archivo")
-            
-            print(f" Archivo leído correctamente")
-            print(f"   - Filas: {len(df)}")
-            print(f"   - Columnas: {len(df.columns)}")
-            
-            # PASO 2: Guardar a Excel
-            # - index=False evita que se guarde la columna de índice numérico
-            # - engine='openpyxl' es el motor para crear archivos .xlsx
-            print(f"\n Guardando en Excel: {archivo_excel}")
-            df.to_excel(archivo_excel, index=False, engine='openpyxl')
-            
-            print(f" ¡Conversión completada exitosamente!")
-            print(f"   Archivo guardado: {archivo_excel}")
-            
+
+            # Convertir cada fila a diccionario
+            registros = df.to_dict(orient='records')
+            repository = IbanRegistryRepository() 
+            repository.insertar_varios(registros)
             return True
             
         except FileNotFoundError:
-            print(f" ERROR: No se encontró el archivo '{archivo_txt}'")
+            print(f" ERROR: No se encontró el archivo ")
             print(f"   Verifica que el archivo existe y el nombre es correcto")
             return False
             

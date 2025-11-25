@@ -10,16 +10,7 @@ class IbanRegistryService:
     def __init__(self):
         pass
 
-    """
-        Convierte el archivo TXT del registro IBAN a formato Excel.
-        
-        Parámetros:
-            archivo_txt (str): Ruta del archivo TXT de entrada
-            archivo_excel (str): Ruta del archivo Excel de salida
-        
-        Retorna:
-            bool: True si la conversión fue exitosa, False si hubo error
-    """
+   
     def upload_registry(file: UploadFile = File(...)): 
         
         ARCHIVO_ENTRADA = 'iban-registry.txt'

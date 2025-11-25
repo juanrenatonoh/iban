@@ -1,7 +1,8 @@
 
 import pandas as pd
 from fastapi import  UploadFile, File
-from iban_registry_repository import IbanRegistryRepository
+from .iban_registry_repository import IbanRegistryRepository
+from .app_logger import logger
 
 
 
@@ -14,8 +15,6 @@ class IbanRegistryService:
     def upload_registry(file: UploadFile = File(...)): 
         
         ARCHIVO_ENTRADA = 'iban-registry.txt'
-        ARCHIVO_SALIDA = 'registro_iban.xlsx'
-
         try:
 
             with open(ARCHIVO_ENTRADA, "wb") as f:

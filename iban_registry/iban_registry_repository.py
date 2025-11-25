@@ -1,4 +1,4 @@
-from app_mongo_client import db
+from .app_mongo_client import db
 
 
 class IbanRegistryRepository:

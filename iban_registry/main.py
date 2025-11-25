@@ -1,6 +1,6 @@
-from IbanRegistryService import IbanRegistryService
+from .IbanRegistryService import IbanRegistryService
 from fastapi import FastAPI ,UploadFile, File
-from app_logger import logger
+from .app_logger import logger
 import requests
 
 app = FastAPI()

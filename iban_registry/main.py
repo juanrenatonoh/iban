@@ -5,6 +5,7 @@ import requests
 
 app = FastAPI()
 
+# probar esto mañana https://fastapi.tiangolo.com/tutorial/bigger-applications/#path-operations-with-apirouter
 
 @app.get("/")
 async def root():

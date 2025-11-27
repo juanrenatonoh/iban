@@ -1,4 +1,15 @@
-# 📊 IBAN Registry - Conversor TXT a Excel
+# 📊 IBAN Registry 
+
+
+## ⚠️ Aviso sobre el estado del proyecto
+
+[![Status: Under Development](https://img.shields.io/badge/status-under_development-yellow)]()
+[![WIP](https://img.shields.io/badge/work_in_progress-yes-orange)]()
+
+Gracias por el interés en este repositorio.  
+El proyecto se encuentra actualmente en **desarrollo activo**, por lo que es posible que la implementación presente diferencias respecto a la documentación disponible.  
+Las estructuras, módulos y funcionalidades pueden cambiar sin previo aviso mientras se estabiliza la arquitectura.
+
 
 ## 📖 Descripción
 

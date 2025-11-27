@@ -5,11 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Iban Registry Debugger: FastAPI",
+            "name": "Iban Registry Debugger Linux : FastAPI",
             "type": "debugpy",
             "request": "launch",
             "module": "uvicorn",
             "python": "${workspaceFolder}/iban_registry/venv/bin/python",
+            "args": [
+                "iban_registry.main:app",
+                "--reload"
+            ],
+            "jinja": true
+        },
+        {
+            "name": "Iban Registry Debugger Windows : FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "python": "${workspaceFolder}/iban_registry/venv/Scripts/python",
             "args": [
                 "iban_registry.main:app",
                 "--reload"

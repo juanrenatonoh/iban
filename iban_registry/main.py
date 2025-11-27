@@ -1,31 +1,9 @@
-from .IbanRegistryService import IbanRegistryService
-from fastapi import FastAPI ,UploadFile, File
+from fastapi import FastAPI
+
 from .app_logger import logger
-import requests
+from .routers import registrys
 
 app = FastAPI()
-
-# probar esto mañana https://fastapi.tiangolo.com/tutorial/bigger-applications/#path-operations-with-apirouter
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-"""
-Load the IBAN registry file
-See the Dictionary file on Readme.md from the IBAN Registry
-"""
-@app.post("/upload_registry")
-async def upload_registry(file: UploadFile = File(...)):
-    
-    logger.info("Uploading Iban Registry...")
-    IbanRegistryService.upload_registry(file)
-    logger.info("Iban Registry loaded successfully")
-    
-    return {
-        "exito": True,
-        "mensaje": "Proceso finalizado" 
-    }
-    
+app.include_router(registrys.router,tags=["iban_registry"],prefix="/registry")
 
 

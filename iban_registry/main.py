@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from .app_logger import logger
+from .core.app_logger import logger
 from .routers import registrys
 
 app = FastAPI()

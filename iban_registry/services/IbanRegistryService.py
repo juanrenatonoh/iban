@@ -1,8 +1,8 @@
 
 import pandas as pd
 from fastapi import  UploadFile, File
-from .iban_registry_repository import IbanRegistryRepository
-from .app_logger import logger
+from .db.iban_registry_repository import IbanRegistryRepository
+from .core.app_logger import logger
 
 
 

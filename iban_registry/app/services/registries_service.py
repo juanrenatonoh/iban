@@ -25,7 +25,7 @@ class RegistryService:
              # Detectar encoding y leer TXT
             encodings = ['latin-1', 'cp1252', 'iso-8859-1', 'utf-8']
             df = None
-
+            
             for encoding in encodings:
                 try:
                     df = pd.read_csv(ARCHIVO_ENTRADA, sep='\t', encoding=encoding, keep_default_na=False)

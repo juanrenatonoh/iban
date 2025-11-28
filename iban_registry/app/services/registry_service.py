@@ -2,16 +2,12 @@
 import pandas as pd
 from fastapi import  UploadFile, File
 from .db.iban_registry_repository import IbanRegistryRepository
-from .core.app_logger import logger
 
-
-
-class IbanRegistryService:
-
-    def __init__(self):
-        pass
-
-   
+class RegistryService:
+    
+    """
+    Upload the IBAN Registry int txt format provided by swift with the ISO 13616 standard
+    """
     def upload_registry(file: UploadFile = File(...)): 
         
         ARCHIVO_ENTRADA = 'iban-registry.txt'

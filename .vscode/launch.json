@@ -11,7 +11,7 @@
             "module": "uvicorn",
             "python": "${workspaceFolder}/iban_registry/venv/bin/python",
             "args": [
-                "iban_registry.main:app",
+                "iban_registry.app.main:app",
                 "--reload"
             ],
             "jinja": true
@@ -23,7 +23,7 @@
             "module": "uvicorn",
             "python": "${workspaceFolder}/iban_registry/venv/Scripts/python",
             "args": [
-                "iban_registry.main:app",
+                "iban_registry.app.main:app",
                 "--reload"
             ],
             "jinja": true

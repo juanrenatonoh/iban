@@ -11,9 +11,7 @@ async def root():
 @router.post("/upload",summary="Upload the IBAN Registry int txt format provided by swift with the ISO 13616 standard")
 async def upload_registry(file: UploadFile = File(...)):
     
-    logger.info("Uploading Iban Registry...")
     # IbanRegistryService.upload_registry(file)
-    logger.info("Iban Registry loaded successfully")
     
     return {
         "exito": True,

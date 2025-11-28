@@ -3,11 +3,11 @@ from logging.handlers import RotatingFileHandler
 
 
 def config_logger():
-    logger = logging.getLogger("app_logger")
+    logger = logging.getLogger("iban_registry")
     logger.setLevel(logging.INFO)
 
     file_handler = RotatingFileHandler(
-        "app.log",
+        "iban_registry.log",
         maxBytes=5_000_000,
         backupCount=5
     )

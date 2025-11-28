@@ -1,14 +1,18 @@
 
 import pandas as pd
 from fastapi import  UploadFile, File
-from .db.iban_registry_repository import IbanRegistryRepository
+from ..db.iban_registry_repository import IbanRegistryRepository
 
 class RegistryService:
+
+    def __init__(self):
+        self.repository = IbanRegistryRepository()
+
     
     """
     Upload the IBAN Registry int txt format provided by swift with the ISO 13616 standard
     """
-    def upload_registry(file: UploadFile = File(...)): 
+    def upload_registry(self, file: UploadFile = File(...)): 
         
         ARCHIVO_ENTRADA = 'iban-registry.txt'
         try:
@@ -34,8 +38,7 @@ class RegistryService:
 
             # Convertir cada fila a diccionario
             registros = df.to_dict(orient='records')
-            repository = IbanRegistryRepository() 
-            repository.insertar_varios(registros)
+            self.repository.insertar_varios(registros)
             return True
             
         except FileNotFoundError:

@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, UploadFile, Depends
-from ..services.registry_service import RegistryService
+from ..services.registries_service import RegistryService
 
 
 router = APIRouter()

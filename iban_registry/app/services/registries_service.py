@@ -12,7 +12,7 @@ class RegistryService:
     """
     Upload the IBAN Registry int txt format provided by swift with the ISO 13616 standard
     """
-    def upload_registry(self, file: UploadFile = File(...)): 
+    def upload_registry(self,file: UploadFile = File(...)): 
         
         ARCHIVO_ENTRADA = 'iban-registry.txt'
         try:

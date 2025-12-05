@@ -2,6 +2,7 @@
 import pandas as pd
 from fastapi import  UploadFile, File
 from ..db.iban_registry_repository import IbanRegistryRepository
+from ..model.registry import Registry
 import io
 
 class RegistryService:
@@ -81,62 +82,63 @@ class RegistryService:
     '''
     def map_description_pattern_example_to_iban_registry_entity(self,data: str):
         
-        iban_registry = []
+        registry_list = []
 
-        for clave,values in data.items():
+        for clave, values in data.items():
+
+            if clave == "Data element":
+                continue
             
-            if(clave == "Data element"):
-                continue    
-                
-            iban_registry.append(
-                        {
-                            "name_of_country": values.get(0), 
-                            "iban_prefix_country_code_iso": values.get(1),
-                            "country_code_includes_other_countries_territories": values.get(2),
-                            "sepa_country": values.get(3),
-                            "sepa_country_also_includes": values.get(4),
-                            "domestic_account_number_example": values.get(5),
-                            "bban": values.get(6),
-                            "bban_structure": values.get(7),
-                            "bban_length": values.get(8),
-                            "bank_identifier_position_within_the_bban": values.get(9),
-                            "bank_identifier_pattern": values.get(10),
-                            "branch_identifier_position_within_the_bban": values.get(11),
-                            "branch_identifier_pattern": values.get(12),
-                            "bank_identifier_example": values.get(13),
-                            "branch_identifier_example": values.get(14),
-                            "bban_example": values.get(15),
-                            "iban": values.get(16),
-                            "iban_structure": values.get(17),
-                            "iban_length": values.get(18),
-                            "effective_date": values.get(19),
-                            "iban_electronic_format_example": values.get(20),
-                            "iban_print_format_example": values.get(21),
-                            "contact_details": values.get(22),
-                            "organisation": values.get(23),
-                            "department": values.get(24),
-                            "street_address": values.get(25),
-                            "city_postcode": values.get(26),
-                            "department_generic_email": values.get(27),
-                            "department_tel": values.get(28),
-                            "primary_contact": values.get(29),
-                            "name": values.get(30),
-                            "first_name": values.get(31),
-                            "title": values.get(32),
-                            "email": values.get(33),
-                            "tel": values.get(34),
-                            "secondary_contact": values.get(35),
-                            "name": values.get(36),
-                            "first_name": values.get(37),
-                            "title": values.get(38),
-                            "email": values.get(39),
-                            "tel": values.get(40),
-                            "updates": values.get(41),
-                            "last_update_date": values.get(42),
-                        }
-                    )
+            
+            registry = Registry(
+                name_of_country=values.get(0),
+                iban_prefix_country_code_iso=values.get(1),
+                country_code_includes_other_countries_territories=values.get(2),
+                sepa_country=values.get(3),
+                sepa_country_also_includes=values.get(4),
+                domestic_account_number_example=values.get(5),
+                bban=values.get(6),
+                bban_structure=values.get(7),
+                bban_length=values.get(8),
+                bank_identifier_position_within_the_bban=values.get(9),
+                bank_identifier_pattern=values.get(10),
+                branch_identifier_position_within_the_bban=values.get(11),
+                branch_identifier_pattern=values.get(12),
+                bank_identifier_example=values.get(13),
+                branch_identifier_example=values.get(14),
+                bban_example=values.get(15),
+                iban=values.get(16),
+                iban_structure=values.get(17),
+                iban_length=values.get(18),
+                effective_date=values.get(19),
+                iban_electronic_format_example=values.get(20),
+                iban_print_format_example=values.get(21),
+                contact_details=values.get(22),
+                organisation=values.get(23),
+                department=values.get(24),
+                street_address=values.get(25),
+                city_postcode=values.get(26),
+                department_generic_email=values.get(27),
+                department_tel=values.get(28),
+                primary_contact=values.get(29),
+                name=values.get(30),
+                first_name=values.get(31),
+                title=values.get(32),
+                email=values.get(33),
+                tel=values.get(34),
+                secondary_contact=values.get(35),
+                name_2=values.get(36),
+                first_name_2=values.get(37),
+                title_2=values.get(38),
+                email_2=values.get(39),
+                tel_2=values.get(40),
+                updates=values.get(41),
+                last_update_date=values.get(42),
+            )
 
-        return iban_registry
+            registry_list.append(registry)
+
+        return registry_list
 
     '''
     Upload the IBAN Registry int txt format provided by swift with the ISO 13616 standard
@@ -162,7 +164,7 @@ class RegistryService:
         registros = df.to_dict("dict") 
         
         self.validate_data_element(registros)
-        iban_registry = self.map_description_pattern_example_to_iban_registry_entity(registros)
+        registry_list = self.map_description_pattern_example_to_iban_registry_entity(registros)
         
         
         

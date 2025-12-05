@@ -1,14 +1,14 @@
 
 import pandas as pd
-from fastapi import  UploadFile, File
+from fastapi import  UploadFile, File,Depends
 from ..db.iban_registry_repository import IbanRegistryRepository
 from ..model.registry import Registry
 import io
 
 class RegistryService:
 
-    def __init__(self):
-        self.repository = IbanRegistryRepository()
+    def __init__(self,iban_registry_repository: IbanRegistryRepository = Depends()):
+        self.iban_registry_repository = iban_registry_repository
 
     '''
     Validate the columns of the record Data element of the registry
@@ -166,15 +166,17 @@ class RegistryService:
         self.validate_data_element(registros)
         registry_list = self.map_description_pattern_example_to_iban_registry_entity(registros)
         
+        self.iban_registry_repository.save(registry_list)
         
-        
-        
-        #for clave,valor in data_element.items():
-        #    print(clave,valor)
-        
-        # self.repository.insertar_varios(registros)
         return True
             
+    
+    '''
+    Find all records in the database
+    '''
+    def find_all(self):
+        return self.iban_registry_repository.find_all()
+
 
     
 

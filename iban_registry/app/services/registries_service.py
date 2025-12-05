@@ -17,6 +17,12 @@ class RegistryService:
     def validate_data_element(self,data: dict):
 
         REQUIRED_FIELDS = [
+                "Name of country",
+                "IBAN prefix country code (ISO 3166)",
+                "Country code includes other countries/territories",
+                "SEPA country",
+                "SEPA country also includes",
+                "Domestic account number example",
                 "BBAN",
                 "BBAN structure",
                 "BBAN length",
@@ -60,7 +66,7 @@ class RegistryService:
         if "Data element" not in data:
             raise Exception("Archivo no valido  , no se encontro la fila Data element")
 
-        values = list(data["Data element"].values())
+        values = [v for v in data["Data element"].values() if v not in ("", None)]
 
         if len(values) != len(REQUIRED_FIELDS):
             raise Exception(f"El número de columnas del Data element es invalido. "f"Esperado: {len(REQUIRED_FIELDS)}, recibido: {len(values)}."
@@ -70,7 +76,7 @@ class RegistryService:
             if actual != expected:
                 raise Exception(f"Columna Data element invalida :  '{expected}' pero se recibió '{actual}'.")
 
-        return True
+        return
 
 
     """

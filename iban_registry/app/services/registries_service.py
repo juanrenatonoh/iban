@@ -80,7 +80,7 @@ class RegistryService:
     '''
     Map the description pattern example to the iban registry entity
     '''
-    def map_description_pattern_example_to_iban_registry_entity(self,data: str):
+    def map_description_pattern_example_to_iban_registry(self,data: str):
         
         registry_list = []
 
@@ -164,8 +164,9 @@ class RegistryService:
         registros = df.to_dict("dict") 
         
         self.validate_data_element(registros)
-        registry_list = self.map_description_pattern_example_to_iban_registry_entity(registros)
+        registry_list = self.map_description_pattern_example_to_iban_registry(registros)
         
+        self.iban_registry_repository.delete_all()
         self.iban_registry_repository.save(registry_list)
         
         return True

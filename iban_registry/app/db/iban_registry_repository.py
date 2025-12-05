@@ -25,4 +25,9 @@ class IbanRegistryRepository:
     def find_all(self):
         records = self.collection.find({},{"_id":0}).to_list()
         return records
-        
+    
+    '''
+    Delete all records in the database
+    '''
+    def delete_all(self):
+        self.collection.delete_many({})

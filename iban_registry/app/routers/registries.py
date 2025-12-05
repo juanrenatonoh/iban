@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, UploadFile, Depends
+from fastapi import APIRouter, File, UploadFile, Depends,HTTPException
 from ..services.registries_service import RegistryService
 
 

@@ -31,9 +31,9 @@ class RegistryService:
         if df is None:
             raise Exception("No se pudo detectar el encoding del archivo")
 
-        # Convertir cada fila a diccionario
-        registros = df.to_dict(orient='records')
-        self.repository.insertar_varios(registros)
+        registros = df.to_dict("dict") # analisis las cabeceras deben corresponder con la 0 hay que validar eso , y listo ya lo tenemos registrar desde la 1 hasta la 42 y listo :D 
+        print(registros)
+        # self.repository.insertar_varios(registros)
         return True
             
         

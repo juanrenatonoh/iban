@@ -1,5 +1,5 @@
 from .app_mongo_client import db
-from ..model.registry import Registry
+from ..model.iban_registry import IBANRegistry
 
 class IbanRegistryRepository:
 
@@ -9,7 +9,7 @@ class IbanRegistryRepository:
     '''
     Save list of iban registry in the database
     '''
-    def save(self, iban_registry: list[Registry]):
+    def save(self, iban_registry: list[IBANRegistry]):
 
         if not iban_registry:
             return 0

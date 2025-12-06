@@ -3,7 +3,7 @@ import pandas as pd
 from fastapi import  UploadFile, File,Depends
 from ..db.iban_registry_repository import IbanRegistryRepository
 from ..model.iban_registry import IBANRegistry , IBANRegistryElement , IBANRegistryBBAN , IBANRegistryIBAN , IBANRegistryContactDetails , IBANRegistryUpdates , IBANRegistryContact
-
+from ..core.domain_exception import DomainException
 import io
 
 class RegistryService:
@@ -64,17 +64,17 @@ class RegistryService:
 
             
         if "Data element" not in data:
-            raise Exception("Archivo no valido  , no se encontro la fila Data element")
+            raise DomainException("Archivo no valido  , no se encontro la fila Data element")
 
         values = [v for v in data["Data element"].values() if v not in ("", None)]
 
         if len(values) != len(REQUIRED_FIELDS):
-            raise Exception(f"El número de columnas del Data element es invalido. "f"Esperado: {len(REQUIRED_FIELDS)}, recibido: {len(values)}."
+            raise DomainException(f"El número de columnas del Data element es invalido. "f"Esperado: {len(REQUIRED_FIELDS)}, recibido: {len(values)}."
                 )
 
         for expected, actual in zip(REQUIRED_FIELDS, values):
             if actual != expected:
-                raise Exception(f"Columna Data element invalida :  '{expected}' pero se recibió '{actual}'.")
+                raise DomainException(f"Columna Data element invalida :  '{expected}' pero se recibió '{actual}'.")
 
         return
 
@@ -174,7 +174,7 @@ class RegistryService:
                 continue
 
         if df is None:
-            raise Exception("No se pudo detectar el encoding del archivo")
+            raise DomainException("No se pudo detectar el encoding del archivo")
 
         registros = df.to_dict("dict") 
         
